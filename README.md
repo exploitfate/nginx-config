@@ -9,4 +9,7 @@ accessible, if needed, even cross-domain.
 
 ## License
 
+## Installation and config guide
+[Installation and config guide](docs/installation.md)
+
 [MIT License](LICENSE.md)
