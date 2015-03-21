@@ -2,15 +2,35 @@
 
 ##Installation
 ====
-Install mysql, nginx, php-fpm, mongo, redis, memcache, git, php, htop
+####1. Install mysql, nginx, php-fpm, memcache, php
 ---
 
 
 
-    sudo apt-get update
-    sudo apt-get install mysql-server mysql-client nginx mongodb redis-server memcached git htop curl
-    sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-mongo php5-redis php5-memcache php5-memcached php5-gd php-apc htop curl
+    sudo apt-get update && sudo apt-get upgrade
+    sudo apt-get install mysql-server mysql-client nginx memcached
+    sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-mongo php5-redis php5-memcache php5-memcached php5-gd php-apc
+    
+####2. Install redis (optional)
+---
 
+
+
+    sudo apt-get install redis-server php5-redis
+
+####3. Install mongodb (optional)
+---
+
+
+
+    sudo apt-get install mongodb php5-mongo
+
+####4. Install tools and utility
+---
+
+
+
+    sudo apt-get install git htop curl
 ##Configuration
 ======
 ###User
