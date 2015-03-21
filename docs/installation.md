@@ -95,13 +95,18 @@ mysql
     FLUSH PRIVILEGES;
 nginx
 ===
-1. Disable default site
+1. Update file `/etc/nginx/nginx.conf` set
+---
+
+
+    user web
+2. Disable default site
 ---
 
 
     sudo rm /etc/nginx/sites-enabled/default
     
-2. Create config helpers
+3. Create config helpers
 ---
 
 - `/etc/nginx/conf.d/charset.conf`
@@ -203,7 +208,7 @@ server_tokens off;
     }
 ```
 
-3. Create project site config `/etc/nginx/sites-available/project.tld`
+4. Create project site config `/etc/nginx/sites-available/project.tld`
 ---
 
 ```
@@ -311,18 +316,18 @@ server_tokens off;
     }
 ```
 
-4. Enable project.tld site config
+5. Enable project.tld site config
 ---
 
 
     sudo ln -s /etc/nginx/sites-available/project.tld /etc/nginx/sites-enabled/
-4. Check config
+6. Check config
 ---
 
 
     sudo nginx -t
 
-5. Restart nginx
+7. Restart nginx
 ---
 
 
@@ -373,4 +378,3 @@ Clone project
 
 
     ./yii migrate
-
