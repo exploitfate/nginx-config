@@ -244,6 +244,9 @@ server_tokens off;
 #####- `/etc/nginx/yii-php-fpm.conf`
 
 ```
+    set           $yii_bootstrap  index.php;
+    index         $yii_bootstrap;
+
     location / {
             try_files $uri $uri/ /$yii_bootstrap$is_args$args;
     }
@@ -287,9 +290,6 @@ server_tokens off;
             error_log     /web/www/project.tld/log/error.log notice;
     
             set           $host_path      /web/www/project.tld/html;
-            set           $yii_bootstrap  index.php;
-    
-            index         $yii_bootstrap;
             root          $host_path/frontend/web;
 
             include yii-php-fpm.conf;
@@ -310,9 +310,6 @@ server_tokens off;
             error_log     /web/www/project.tld/log/error.backend.log notice;
     
             set           $host_path      /web/www/project.tld/html;
-            set           $yii_bootstrap  index.php;
-    
-            index         $yii_bootstrap;
             root          $host_path/backend/web;
     
             include yii-php-fpm.conf;
