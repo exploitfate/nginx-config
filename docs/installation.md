@@ -68,8 +68,8 @@
 
 
     memory_limit = 512M
-    post_max_size = 1G
-    upload_max_filesize = 1G
+    post_max_size = 128G
+    upload_max_filesize = 128G
 
 ####3. Enable this mods
 
@@ -241,17 +241,44 @@ server_tokens off;
     }
 ```
 
+#####- `/etc/nginx/yii-php-fpm.conf`
+
+```
+    location / {
+            try_files $uri $uri/ /$yii_bootstrap$is_args$args;
+    }
+
+    location ~ \.php$ {
+            try_files $uri =404;
+
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_index           $yii_bootstrap;
+
+            # Connect to php-fpm via socket
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+
+            fastcgi_connect_timeout     30s;
+            fastcgi_read_timeout        30s;
+            fastcgi_send_timeout        60s;
+            fastcgi_ignore_client_abort on;
+            fastcgi_pass_header         "X-Accel-Expires";
+
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO        $fastcgi_path_info;
+            fastcgi_param  HTTP_REFERER     $http_referer;
+            include fastcgi_params;
+    }
+```
+
 
 ####4. Create project site config `/etc/nginx/sites-available/project.tld`
 
 ```
     ##
-    # For new site create folders newsite.com/log and newsite.com/html at /web/www
-    # and replace project.tld with newsite.com in this file
-    #
-    # For product environment uncomment include expires.conf
+    # For product environment uncomment "include expires.conf"
     ##
     
+    # frontend
     server {
             server_name project.tld;
             listen 80;
@@ -264,37 +291,8 @@ server_tokens off;
     
             index         $yii_bootstrap;
             root          $host_path/frontend/web;
-    
-            location / {
-                    try_files $uri $uri/ /$yii_bootstrap$is_args$args;
-            }
-    
-            location ~ \.php$ {
-                    try_files $uri =404;
-    
-                    fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                    fastcgi_index           $yii_bootstrap;
-    
-                    # Connect to php-fpm via socket
-                    fastcgi_pass unix:/var/run/php5-fpm.sock;
-    
-                    fastcgi_connect_timeout     30s;
-                    fastcgi_read_timeout        30s;
-                    fastcgi_send_timeout        60s;
-                    fastcgi_ignore_client_abort on;
-                    fastcgi_pass_header         "X-Accel-Expires";
-    
-                    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-                    fastcgi_param  PATH_INFO        $fastcgi_path_info;
-                    fastcgi_param  HTTP_REFERER     $http_referer;
-                    include fastcgi_params;
-            }
-            
-            # You can add backend here 
-            # location /admin {
-            #        root          $host_path/backend/web;
-            #        try_files $uri $uri/ /$yii_bootstrap$is_args$args;
-            # }
+
+            include yii-php-fpm.conf;
             
             include cross-domain-fonts.conf;
             include protect-system-files.conf;
@@ -303,6 +301,7 @@ server_tokens off;
             #include expires.conf;
     }
     
+    # backend
     server {
             server_name backend.project.tld;
             listen 80;
@@ -316,30 +315,7 @@ server_tokens off;
             index         $yii_bootstrap;
             root          $host_path/backend/web;
     
-            location / {
-                    try_files $uri $uri/ /$yii_bootstrap$is_args$args;
-            }
-    
-            location ~ \.php$ {
-                    try_files $uri =404;
-    
-                    fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                    fastcgi_index           $yii_bootstrap;
-    
-                    # Connect to php-fpm via socket
-                    fastcgi_pass unix:/var/run/php5-fpm.sock;
-    
-                    fastcgi_connect_timeout     30s;
-                    fastcgi_read_timeout        30s;
-                    fastcgi_send_timeout        60s;
-                    fastcgi_ignore_client_abort on;
-                    fastcgi_pass_header         "X-Accel-Expires";
-    
-                    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-                    fastcgi_param  PATH_INFO        $fastcgi_path_info;
-                    fastcgi_param  HTTP_REFERER     $http_referer;
-                    include fastcgi_params;
-            }
+            include yii-php-fpm.conf;
             
             include cross-domain-fonts.conf;
             include protect-system-files.conf;
