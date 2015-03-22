@@ -61,7 +61,7 @@
     cgi.fix_pathinfo= 0
     expose_php = Off
 
-####2. Create php mods file `/etc/php5/mods-available/project.ini`
+####2. Create php mods file `/etc/php5/mods-available/php-override.ini`
 
 
     memory_limit = 512M
@@ -72,7 +72,7 @@
 
 
     sudo php5enmod nginx
-    sudo php5enmod project
+    sudo php5enmod php-override
 
 
 ####4. Update file `/etc/php5/fpm/pool.d/www.conf` set
@@ -152,171 +152,171 @@ server_tokens off;
 #####- `/etc/nginx/conf.d/gzip.conf`
 
 ```
-    # Gzip Settings
-    #gzip on;               # enabled by default
-    #gzip_disable "msie6";  # enabled by default
-    gzip_vary on;
-    gzip_proxied any;
-    gzip_comp_level 6;
-    gzip_buffers 16 8k;
-    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+# Gzip Settings
+#gzip on;               # enabled by default
+#gzip_disable "msie6";  # enabled by default
+gzip_vary on;
+gzip_proxied any;
+gzip_comp_level 6;
+gzip_buffers 16 8k;
+gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 ```
 
 #####- `/etc/nginx/expires.conf`
 
 ```
-    # Expire rules for static content
-    
-    # No default expire rule. This config mirrors that of apache as outlined in the
-    # html5-boilerplate .htaccess file. However, nginx applies rules by location,
-    # the apache rules are defined by type. A consequence of this difference is that
-    # if you use no file extension in the url and serve html, with apache you get an
-    # expire time of 0s, with nginx you'd get an expire header of one month in the
-    # future (if the default expire rule is 1 month). Therefore, do not use a
-    # default expire rule with nginx unless your site is completely static
-    
-    # cache.appcache, your document html and data
-    location ~* \.(?:manifest|appcache|html?|xml|json)$ {
-      expires -1;
-      #access_log logs/static.log;
-    }
-    
-    # Feed
-    location ~* \.(?:rss|atom)$ {
-      expires 1h;
-      add_header Cache-Control "public";
-    }
-    
-    # Media: images, icons, video, audio, HTC
-    location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc|webp|mp3)$ {
-      expires 1M;
-      access_log off;
-      add_header Cache-Control "public";
-    }
-    
-    # CSS and Javascript
-    location ~* \.(?:css|js)$ {
-      expires 1y;
-      access_log off;
-      add_header Cache-Control "public";
-    }
-    # favicon disable logs
-    location = /favicon.ico {
-      access_log off;
-      log_not_found off;
-    }
+# Expire rules for static content
+
+# No default expire rule. This config mirrors that of apache as outlined in the
+# html5-boilerplate .htaccess file. However, nginx applies rules by location,
+# the apache rules are defined by type. A consequence of this difference is that
+# if you use no file extension in the url and serve html, with apache you get an
+# expire time of 0s, with nginx you'd get an expire header of one month in the
+# future (if the default expire rule is 1 month). Therefore, do not use a
+# default expire rule with nginx unless your site is completely static
+
+# cache.appcache, your document html and data
+location ~* \.(?:manifest|appcache|html?|xml|json)$ {
+  expires -1;
+  #access_log logs/static.log;
+}
+
+# Feed
+location ~* \.(?:rss|atom)$ {
+  expires 1h;
+  add_header Cache-Control "public";
+}
+
+# Media: images, icons, video, audio, HTC
+location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc|webp|mp3)$ {
+  expires 1M;
+  access_log off;
+  add_header Cache-Control "public";
+}
+
+# CSS and Javascript
+location ~* \.(?:css|js)$ {
+  expires 1y;
+  access_log off;
+  add_header Cache-Control "public";
+}
+# favicon disable logs
+location = /favicon.ico {
+  access_log off;
+  log_not_found off;
+}
 ```
 
 #####- `/etc/nginx/cross-domain-fonts.conf`
 
 ```
-    # Cross domain webfont access
-    location ~* \.(?:ttf|ttc|otf|eot|woff|woff2)$ {
-        # Also, set cache rules for webfonts.
-        #
-        # See http://wiki.nginx.org/HttpCoreModule#location
-        # And https://github.com/h5bp/server-configs/issues/85
-        # And https://github.com/h5bp/server-configs/issues/86
-        expires 1M;
-        access_log off;
-        add_header Cache-Control "public";
-    }
+# Cross domain webfont access
+location ~* \.(?:ttf|ttc|otf|eot|woff|woff2)$ {
+    # Also, set cache rules for webfonts.
+    #
+    # See http://wiki.nginx.org/HttpCoreModule#location
+    # And https://github.com/h5bp/server-configs/issues/85
+    # And https://github.com/h5bp/server-configs/issues/86
+    expires 1M;
+    access_log off;
+    add_header Cache-Control "public";
+}
 ```
 
 #####- `/etc/nginx/protect-system-files.conf`
 
 ```
-    # Prevent clients from accessing hidden files (starting with a dot)
-    # This is particularly important if you store .htpasswd files in the site hierarchy
-    location ~* (?:^|/)\. {
-        deny all;
-    }
-    
-    # Prevent clients from accessing to backup/config/source files
-    location ~* (?:\.(?:bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|md)|~)$ {
-        deny all;
-    }
+# Prevent clients from accessing hidden files (starting with a dot)
+# This is particularly important if you store .htpasswd files in the site hierarchy
+location ~* (?:^|/)\. {
+    deny all;
+}
+
+# Prevent clients from accessing to backup/config/source files
+location ~* (?:\.(?:bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|md)|~)$ {
+    deny all;
+}
 ```
 
 #####- `/etc/nginx/yii-php-fpm.conf`
 
 ```
-    set           $yii_bootstrap  index.php;
-    index         $yii_bootstrap;
+set           $yii_bootstrap  index.php;
+index         $yii_bootstrap;
 
-    location / {
-            try_files $uri $uri/ /$yii_bootstrap$is_args$args;
-    }
+location / {
+        try_files $uri $uri/ /$yii_bootstrap$is_args$args;
+}
 
-    location ~ \.php$ {
-            try_files $uri =404;
+location ~ \.php$ {
+        try_files $uri =404;
 
-            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_index           $yii_bootstrap;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_index           $yii_bootstrap;
 
-            # Connect to php-fpm via socket
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
+        # Connect to php-fpm via socket
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
 
-            fastcgi_connect_timeout     30s;
-            fastcgi_read_timeout        30s;
-            fastcgi_send_timeout        60s;
-            fastcgi_ignore_client_abort on;
-            fastcgi_pass_header         "X-Accel-Expires";
+        fastcgi_connect_timeout     30s;
+        fastcgi_read_timeout        30s;
+        fastcgi_send_timeout        60s;
+        fastcgi_ignore_client_abort on;
+        fastcgi_pass_header         "X-Accel-Expires";
 
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-            fastcgi_param  PATH_INFO        $fastcgi_path_info;
-            fastcgi_param  HTTP_REFERER     $http_referer;
-            include fastcgi_params;
-    }
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  PATH_INFO        $fastcgi_path_info;
+        fastcgi_param  HTTP_REFERER     $http_referer;
+        include fastcgi_params;
+}
 ```
 
 
 ####4. Create project site config `/etc/nginx/sites-available/project.tld`
 
 ```
-    ##
-    # For product environment uncomment "include expires.conf"
-    ##
-    
-    # frontend
-    server {
-            server_name project.tld;
-            listen 80;
-    
-            access_log    /web/www/project.tld/log/access.log combined buffer=50k;
-            error_log     /web/www/project.tld/log/error.log notice;
-    
-            set           $host_path      /web/www/project.tld/html;
-            root          $host_path/frontend/web;
+##
+# For product environment uncomment "include expires.conf"
+##
 
-            include yii-php-fpm.conf;
-            
-            include cross-domain-fonts.conf;
-            include protect-system-files.conf;
-            
-            # Uncomment this on product environment
-            #include expires.conf;
-    }
-    
-    # backend
-    server {
-            server_name backend.project.tld;
-            listen 80;
-    
-            access_log    /web/www/project.tld/log/access.backend.log combined buffer=50k;
-            error_log     /web/www/project.tld/log/error.backend.log notice;
-    
-            set           $host_path      /web/www/project.tld/html;
-            root          $host_path/backend/web;
-    
-            include yii-php-fpm.conf;
-            
-            include cross-domain-fonts.conf;
-            include protect-system-files.conf;
-            
-            # Uncomment this on product environment
-            #include expires.conf;
-    }
+# frontend
+server {
+        server_name project.tld;
+        listen 80;
+
+        access_log    /web/www/project.tld/log/access.log combined buffer=50k;
+        error_log     /web/www/project.tld/log/error.log notice;
+
+        set           $host_path      /web/www/project.tld/html;
+        root          $host_path/frontend/web;
+
+        include yii-php-fpm.conf;
+        
+        include cross-domain-fonts.conf;
+        include protect-system-files.conf;
+        
+        # Uncomment this on product environment
+        #include expires.conf;
+}
+
+# backend
+server {
+        server_name backend.project.tld;
+        listen 80;
+
+        access_log    /web/www/project.tld/log/access.backend.log combined buffer=50k;
+        error_log     /web/www/project.tld/log/error.backend.log notice;
+
+        set           $host_path      /web/www/project.tld/html;
+        root          $host_path/backend/web;
+
+        include yii-php-fpm.conf;
+        
+        include cross-domain-fonts.conf;
+        include protect-system-files.conf;
+        
+        # Uncomment this on product environment
+        #include expires.conf;
+}
 ```
 
 
