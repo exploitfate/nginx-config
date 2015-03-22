@@ -41,8 +41,7 @@
 
 
 
-    sudo mkdir /web
-    sudo mkdir /web/www
+    sudo mkdir /web /web/www
     sudo useradd -d /web/www web
     sudo chown -R web:web /web/www
     
@@ -51,9 +50,7 @@
 
 
     sudo su web    
-    mkdir /web/www/project.tld
-    mkdir /web/www/project.tld/log
-    mkdir /web/www/project.tld/html
+    mkdir /web/www/project.tld /web/www/project.tld/log /web/www/project.tld/html
 
 ### php-fpm
 
