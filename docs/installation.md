@@ -9,7 +9,7 @@
 
     sudo apt-get update && sudo apt-get upgrade
     sudo apt-get install mysql-server mysql-client nginx memcached
-    sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-mongo php5-redis php5-memcache php5-memcached php5-gd php-apc
+    sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-redis php5-memcache php5-memcached php5-gd php-apc
     
 
 ####2. Install redis (optional)
