@@ -65,8 +65,8 @@
 
 
     memory_limit = 512M
-    post_max_size = 128G
-    upload_max_filesize = 128G
+    post_max_size = 128M
+    upload_max_filesize = 128M
 
 ####3. Enable this mods
 
