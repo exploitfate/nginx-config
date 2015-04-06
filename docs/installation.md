@@ -3,12 +3,12 @@
 ##Installation
 
 ####1. Install mysql, nginx, php-fpm, memcache, php
-
+> Hint: [What's New in MySQL 5.6](http://dev.mysql.com/tech-resources/articles/whats-new-in-mysql-5.6.html) 
 
 
 
     sudo apt-get update && sudo apt-get upgrade
-    sudo apt-get install mysql-server mysql-client nginx memcached
+    sudo apt-get install mysql-server-5.6 nginx memcached
     sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-memcache php5-memcached php5-gd php-apc
     
 
