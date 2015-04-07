@@ -89,8 +89,14 @@
     sudo service php5-fpm restart
 
 ###mysql
+####1. Improve MySQL Installation Security (for product environment).
+#####Run the script called "mysql_secure_installation"
 
-####1. Login to mysql console.
+ 
+ 
+    mysql_secure_installation
+
+####2. Login to mysql console.
 
 
 
@@ -100,7 +106,7 @@
 
     sudo dpkg-reconfigure mysql-server-5.5
 
-####2. Create mysql project db and user
+####3. Create mysql project db and user
 
 #####Create mysql project db
  
