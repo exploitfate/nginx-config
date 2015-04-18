@@ -3,12 +3,12 @@
 ##Installation
 
 ####1. Install mysql, nginx, php-fpm, memcache, php
-
+> Hint: [What's New in MySQL 5.6](http://dev.mysql.com/tech-resources/articles/whats-new-in-mysql-5.6.html) 
 
 
 
     sudo apt-get update && sudo apt-get upgrade
-    sudo apt-get install mysql-server mysql-client nginx memcached
+    sudo apt-get install nginx memcached mysql-server-core-5.6 mysql-server-5.6 mysql-client-5.6 mysql-client-core-5.6 mysql-common-5.6
     sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-memcache php5-memcached php5-gd php-apc
     
 
@@ -65,8 +65,8 @@
 
 
     memory_limit = 512M
-    post_max_size = 128G
-    upload_max_filesize = 128G
+    post_max_size = 128M
+    upload_max_filesize = 128M
 
 ####3. Enable this mods
 
@@ -89,8 +89,14 @@
     sudo service php5-fpm restart
 
 ###mysql
+####1. Improve MySQL Installation Security (for product environment).
+#####Run the script called "mysql_secure_installation"
 
-####1. Login to mysql console.
+ 
+ 
+    mysql_secure_installation
+
+####2. Login to mysql console.
 
 
 
@@ -98,9 +104,9 @@
 > Hint: for reset mysql root password use
 
 
-    sudo dpkg-reconfigure mysql-server-5.5
+    sudo dpkg-reconfigure mysql-server-5.6
 
-####2. Create mysql project db and user
+####3. Create mysql project db and user
 
 #####Create mysql project db
  
