@@ -283,12 +283,10 @@ server {
         server_name project.tld;
         listen 80;
 
-        set           $host_path      /web/www/project.tld;
+        root          /web/www/project.tld/html/frontend/web;
 
-        root          $host_path/html/frontend/web;
-
-        access_log    $host_path/log/access.log combined buffer=50k;
-        error_log     $host_path/log/error.log notice;
+        access_log    /web/www/project.tld/log/access.log combined buffer=50k;
+        error_log     /web/www/project.tld/log/error.log notice;
 
         include yii-php-fpm.conf;
         
@@ -304,12 +302,10 @@ server {
         server_name backend.project.tld;
         listen 80;
 
-        set           $host_path      /web/www/project.tld;
-        
-        root          $host_path/html/backend/web;
+        root          /web/www/project.tld/html/backend/web;
 
-        access_log    $host_path/log/access.backend.log combined buffer=50k;
-        error_log     $host_path/log/error.backend.log notice;
+        access_log    /web/www/project.tld/log/access.backend.log combined buffer=50k;
+        error_log     /web/www/project.tld/log/error.backend.log notice;
 
         include yii-php-fpm.conf;
         
