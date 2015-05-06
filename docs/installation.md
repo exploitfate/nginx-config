@@ -111,7 +111,7 @@
 #####Create mysql project db
  
  
-    CREATE DATABASE projectdatabase;
+    CREATE DATABASE `projectdatabase`  CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 #####Create mysql project user
 
