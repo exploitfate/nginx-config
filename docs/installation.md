@@ -348,6 +348,7 @@ server {
 
 
 
+    sudo su web
     ssh-keygen -t rsa -C "deploy@project.tld"
  and add `project.tld` to the repo deployment key
 
@@ -358,7 +359,6 @@ server {
 ####2. Clone project
 
 
-    sudo su web
     cd ~/project.tld/
     git clone git@bitbucket.org:gitaccount/project.git html
 
