@@ -348,11 +348,11 @@ server {
 
 
 
-    ssh-keygen -t rsa -C "web@project.tld"
+    ssh-keygen -t rsa -C "deploy@project.tld"
  and add `project.tld` to the repo deployment key
 
 
-    cat ~/.ssh/id_rsa
+    cat ~/.ssh/id_rsa.pub
 
 
 ####2. Clone project
