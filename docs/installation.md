@@ -47,6 +47,15 @@
     sudo chown -R web:web /web/www
     
 
+
+> Hint: Add a existing user to existing group
+
+
+
+    sudo usermod -a -G group user
+    
+
+
 ####2. Create project dirs
 
 
