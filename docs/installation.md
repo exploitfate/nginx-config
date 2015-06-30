@@ -254,21 +254,21 @@ location ~* (?:\.(?:bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|md)|~)$ {
 }
 ```
 
-#####- `/etc/nginx/yii-php-fpm.conf`
+#####- `/etc/nginx/php-fpm.conf`
 
 ```
-set           $yii_bootstrap  index.php;
-index         $yii_bootstrap;
+set           $bootstrap  index.php;
+index         $bootstrap;
 
 location / {
-        try_files $uri $uri/ /$yii_bootstrap$is_args$args;
+        try_files $uri $uri/ /$bootstrap$is_args$args;
 }
 
 location ~ \.php$ {
         try_files $uri =404;
 
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_index           $yii_bootstrap;
+        fastcgi_index               $bootstrap;
 
         # Connect to php-fpm via socket
         fastcgi_pass unix:/var/run/php5-fpm.sock;
@@ -304,7 +304,7 @@ server {
         access_log    /web/www/project.tld/log/access.log combined buffer=50k;
         error_log     /web/www/project.tld/log/error.log notice;
 
-        include yii-php-fpm.conf;
+        include php-fpm.conf;
         
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
@@ -323,7 +323,7 @@ server {
         access_log    /web/www/project.tld/log/access.backend.log combined buffer=50k;
         error_log     /web/www/project.tld/log/error.backend.log notice;
 
-        include yii-php-fpm.conf;
+        include php-fpm.conf;
         
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
