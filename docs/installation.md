@@ -357,7 +357,7 @@ location ~ \.php$ {
 # For product environment uncomment "include expires.conf" and comment "include deny-bots.conf;"
 ##
 
-# Must be include in http directive 
+# Must be included in http directive 
 include deny-bots.conf;
 
 # frontend
