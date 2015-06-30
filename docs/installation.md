@@ -313,7 +313,7 @@ map $http_user_agent $limit_bots {
 }
 
 if ($limit_bots = 1) {
-	return 403;}
+	return 403;
 }
 ```
 
@@ -354,8 +354,11 @@ location ~ \.php$ {
 
 ```
 ##
-# For product environment uncomment "include expires.conf"
+# For product environment uncomment "include expires.conf" and comment "include deny-bots.conf;"
 ##
+
+# Must be include in http directive 
+include deny-bots.conf;
 
 # frontend
 server {
@@ -372,8 +375,6 @@ server {
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
         
-        # Comment this on product environment
-        include deny-bots.conf;
         
         # Uncomment this on product environment
         #include expires.conf;
@@ -394,8 +395,6 @@ server {
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
         
-        # Deny bots on backend
-        include deny-bots.conf;
         
         # Uncomment this on product environment
         #include expires.conf;
