@@ -254,6 +254,69 @@ location ~* (?:\.(?:bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|md)|~)$ {
 }
 ```
 
+#####- `/etc/nginx/deny-bots.conf`
+
+```
+map $http_user_agent $limit_bots {
+	default 0;
+	~*(bingbot|Googlebot|MJ12bot|Riddlerbot|sogou\ spider|YandexBot|Baiduspider|ia_archiver|UptimeRobot|Yahoo) 1;
+	~*(TurnitinBot|XoviBot|Daumoa|DotBot|AhrefsBot|Exabot|CCBot|ZumBot|OpenWebSpider|SearchmetricsBot|SMTBot) 1;
+	~*(MSNBot|stq_bot|SeznamBot|archive.org_bot|gocrawl|proximic|Genieo\ Web\ filter|EasouSpider|meanpathbot) 1;
+	~*(JamesBOT|Sitedomain-Bot|ichiro|contentDetection|spbot|ChangeDetection|coccoc|MetaJobBot|OrangeBot|Spinn3r) 1;
+	~*(Vagabondo|GrapeshotCrawler|WorldBrewBot|NaverBot|Mail.Ru\ bot|sistrix|SemrushBot|WeViKaBot|BacklinkCrawler) 1;
+	~*(ShopWiki|WeSEE|GigablastOpenSource|Crawler4j|bitlybot|ProductoDownloadUrlBot/|Qualidator.com\ Bot|BLEXBot) 1;
+	~*(rogerbot|Kraken|FlipboardProxy|Lipperhey\ Spider|Jyxobot|Job\ Roboter\ Spider|Speedy\ Spider|ImplisenseBot) 1;
+	~*(MojeekBot|Wotbox|linkdexbot|voltron|Seobility|aiHitBot|yacybot|ICC-Crawler|ShowyouBot|psbot|iCjobs) 1;
+	~*(SEOkicks-Robot|WBSearchBot|oBot|EuripBot|Alexabot|magpie-crawler|Woko|omgilibot|NetcraftSurveyAgent) 1;
+	~*(UASlinkChecker|A6-Indexer|Qirina\ Hurdler|memoryBot|Netseer|JobdiggerSpider|AntBot|uMBot|MergeFlow-PageReader) 1;
+	~*(bnf.fr_bot|netEstate\ Crawler|007AC9|bl.uk_lddc_bot|Blekkobot|VoilaBot|SEOdiver|NextGenSearchBot|TinEye) 1;
+	~*(AboutUsBot|bot-pge.chlooe.com|trendictionbot|HubSpot\ Crawler|DomainAppender|linguatools|YioopBot|YoudaoBot) 1;
+	~*(YamanaLab-bot|kinshoo|bixocrawler|ThumbSniper|Dlvr.it/1.0|MetaGeneratorCrawler|Plukkie|OpenCalaisSemanticProxy) 1;
+	~*(SBSearch|Aboundexbot|Impressumscrawler|Infohelfer|R6\ bot|LivelapBot/0.2|URLAppendBot|\ Scrubby|SEOENGBot) 1;
+	~*(Experibot|UnisterBot|FreeWebMonitoring\ SiteChecker|LinkWalker|Browsershots|BDCbot|IstellaBot|SpiderLing) 1;
+	~*(CareerBot|SEOCentro\ bot|BDFetch|Online\ Domain\ Tools|WordPress.com\ mShots|WebTarantula.com\ Crawler|NerdyBot) 1;
+	~*(CrazyWebCrawler-Spider|Scrapy|IntegromeDB|WebThumbnail|Panscient\ web\ crawler|Cliqzbot|dlvr.it) 1;
+	~*(HypeStat|AddThis.com|datagnionbot|MiaDev|Pinterest|MixBot|SurcentroBot|webmastercoffee|Peeplo\ Screenshot\ Bot) 1;
+	~*(ZeerchBot|AMZNKAssocBot|SCFCrawler|idmarch|SputnikBot|LinkedInBot|seegnifybot|dlcbot|thumbshots-de-Bot|NalezenCzBot) 1;
+	~*(pr-cy.ru\ Screenshot\ Bot|LoadImpactPageAnalyzer|AskQuickly|STINGbot|WebCorp|BUbiNG|Motoricerca-Robots.txt-Checker) 1;
+	~*(socialbm_bot|HubSpot\ Connect|Company\ News\ Search\ engine|x28-job-bot|COMODOSpider|EveryoneSocialBot|Ezooms) 1;
+	~*(Symfony\ Spider|Iframely|KrOWLer|Twingly\ Recon|Robots_Tester|FacebookExternalHit|Arachnophilia|eCommerceBot) 1;
+	~*(emefgebot|Nuhk|Najdi.si|SecurityResearchBot|CloudServerMarketSpider|YYSpider|200PleaseBot|Steeler|nekstbot) 1;
+	~*(360Spider|LoadTimeBot|webinatorbot|Leikibot|musobot|search.KumKie.com|Nigma.ru|CompSpyBot|SeoCheckBot|hawkReader) 1;
+	~*(PercolateCrawler|Butterfly|008|Slackbot|Falconsbot|SSL-Crawler|Embedly|backlink-check.de|adressendeutschland.de) 1;
+	~*(XRL|IdeelaborPlagiaat|SiteCondor|Web-Monitoring|Vedma|parsijoo|GarlikCrawler|FyberSpider|classbot|Feedly|WebCookies) 1;
+	~*(CloudFlare-AlwaysOnline|Readability|suggybot|CatchBot|Jabse.com\ Crawler|woriobot|ExB\ Language\ Crawler|kulturarw) 1;
+	~*(BrainbruBot|KomodiaBot|IXEbot|CMS\ Crawler|immediatenet\ thumbnails|Shareaholicbot|Qualidator.com\ SiteAnalyzer\ 1.0) 1;
+	~*(BegunAdvertising|LuminateBot|linkdex.com|Curious\ George|Fetch-Guess|alexa\ site\ audit|AraBot|CliqzBot|findlinks) 1;
+	~*(CCResearchBot|Semantifire|LinkAider|Zookabot|ScreenerBot\ Crawler|PaperLiBot|QuerySeekerSpider|Crowsnest|UnwindFetchor) 1;
+	~*(MetaURI\ API|AcoonBot|Gigabot|firmilybot|Sosospider|OpenindexSpider|MetaHeadersBot|Strokebot|GeliyooBot|ownCloud\ Server\ Crawler) 1;
+	~*(CirrusExplorer|ProCogSEOBot|Open\ Web\ Analytics\ Bot|RyzeCrawler|discoverybot|crawler\ for\ netopian|ADmantX\ Platform\ Semantic\ Analyzer) 1;
+	~*(Linguee\ Bot|SolomonoBot|Grahambot|Automattic\ Analytics\ Crawler|PiplBot|FlightDeckReportsBot|fastbot\ crawler|4seohuntBot) 1;
+	~*(Updownerbot|JikeSpider|NLNZ_IAHarvester|wsAnalyzer|YodaoBot|Esribot|Thumbshots.ru|BlogPulse|bot.wsowner.com|wscheck.com) 1;
+	~*(Qseero|drupact|HuaweiSymantecSpider|PagePeeker|HomeTags|facebookplatform|Pixray-Seeker|MeMoNewsBot|ProCogBot|WillyBot) 1;
+	~*(peerindex|MLBot|WebNL|Peepowbot|Semager|MIA\ Bot|heritrix|Eurobot|DripfeedBot|Whoismindbot|Bad-Neighborhood|Hailoobot) 1;
+	~*(akula|MetamojiCrawler|Page2RSS|EasyBib\ AutoCite|NerdByNature.Bot|EventGuruBot|quickobot|gonzo|Influencebot|MSRBOT|Ronzoobot) 1;
+	~*(ScoutJet|Twikle|SWEBot|RADaR-Bot|DCPbot|Castabot|imbot|EdisterBot|WASALive-Bot|Accelobot|PostPost|factbot|Setoozbot|biwec) 1;
+	~*(Search17Bot|Lijit|JUST-CRAWLER|Apercite|pmoz.info\ ODP\ link\ checker|LemurWebCrawler|Covario-IDS|Holmes|RankurBot|AdsBot-Google) 1;
+	~*(envolk|Ask\ Jeeves/Teoma|LexxeBot|StackRambler|Abrave\ Spider|EvriNid|arachnode.net|CamontSpider|wikiwix-bot|Nymesis) 1;
+	~*(trendictionbot|SEODat|SygolBot|Snapbot|ZookaBot|CligooRobot|cityreview|nworm|SBIder|TwengaBot|Dot\ TK\ -\ spider|ParchBot) 1;
+	~*(Peew|YRSpider|Urlfilebot\ (Urlbot)|Gaisbot|WatchMouse|Tagoobot|WebWatch/Robot_txtChecker|urlfan-bot|StatoolsBot|page_verifier) 1;
+	~*(SSLBot|SAI\ Crawler|DomainDB|WMCAI_robot|voyager|copyright\ sheriff|Ocelli|Twiceler|amibot|abby|NetResearchServer|VideoSurf_bot) 1;
+	~*(XML\ Sitemaps\ Generator|BlinkaCrawler|nodestackbot|Pompos|taptubot|BabalooSpider|Yaanb|Girafabot|livedoor\ ScreenShot|eCairn-Grabber) 1;
+	~*(FauBot|Toread-Crawler|Setoozbot|MetaURI|L.webis|Web-sniffer|FairShare|Ruky-Roboter|ThumbShots-Bot|BotOnParade|Amagit.COM|HatenaScreenshot) 1;
+	~*(HolmesBot|dotSemantic|Karneval-Bot|AportWorm|XmarksFetch|FeedFinder/bloggz.se|CorpusCrawler|Willow\ Internet\ Crawler|OrgbyBot|GingerCrawler) 1;
+	~*(pingdom.com_bot|Nutch|baypup|Mp3Bot|192.comAgent|Surphace\ Scout|WikioFeedBot|Szukacz|DBLBot|Thumbnail.CZ\ robot|LinguaBot|GurujiBot) 1;
+	~*(Charlotte|50.nu|SanszBot|moba-crawler|HeartRails_Capture|SurveyBot|MnoGoSearch|smart.apnoti.com\ Robot|Topicbot|JadynAveBot|OsObot) 1;
+	~*(WebImages|WinWebBot|Scooter|Scarlett|GOFORITBOT|DKIMRepBot|Yanga|DNS-Digger-Explorer|Robozilla|YowedoBot|botmobi|Fooooo_Web_Video_Crawl) 1;
+	~*(UptimeDog|Metaspinner/0.01|Touche|RSSMicro.com\ RSS/Atom\ Feed\ Robot|SniffRSS|Kalooga|FeedCatBot|WebRankSpider|Flatland\ Industries\ Web\ Spider) 1;
+	~*(DealGates\ Bot|Link\ Valet\ Online|Shelob|Technoratibot|Flocke\ bot|FollowSite\ Bot|Visbot) 1;
+}
+
+if ($limit_bots = 1) {
+	return 403;}
+}
+```
+
 #####- `/etc/nginx/php-fpm.conf`
 
 ```
@@ -309,6 +372,9 @@ server {
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
         
+        # Comment this on product environment
+        include deny-bots.conf;
+        
         # Uncomment this on product environment
         #include expires.conf;
 }
@@ -327,6 +393,9 @@ server {
         
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
+        
+        # Deny bots on backend
+        include deny-bots.conf;
         
         # Uncomment this on product environment
         #include expires.conf;
