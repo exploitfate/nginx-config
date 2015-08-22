@@ -22,7 +22,7 @@ For external conection add
 
     bind 0.0.0.0
 
-## Fix background save may fail under low memory condition. Add as the last line of `/etc/sysctl.conf` 
+## Fix background save under low memory condition. Add as the last line of `/etc/sysctl.conf` 
 
 
 
