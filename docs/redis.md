@@ -22,14 +22,14 @@ For external conection add
 
     bind 0.0.0.0
 
-## Fix background save may fail under low memory condition
+## Fix background save may fail under low memory condition. Add as the last line of `/etc/sysctl.conf` 
 
 
 
     vm.overcommit_memory = 1
     
     
-or run the command (for current session)
+or run the command (take effect for current session)
 
 
 
