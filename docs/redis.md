@@ -9,7 +9,6 @@
 ## Create `/etc/redis/conf.d/override.conf`
 
 
-    bind 0.0.0.0
     requirepass "soMe:%wery1#_str0ng';pasSword"
     rename-command CONFIG ""
     rename-command SHUTDOWN ""
@@ -22,3 +21,16 @@ For external conection add
 
 
     bind 0.0.0.0
+
+## Fix background save may fail under low memory condition
+
+
+
+    vm.overcommit_memory = 1
+    
+    
+or run the command (for current session)
+
+
+
+    sysctl vm.overcommit_memory=1
