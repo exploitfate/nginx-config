@@ -396,7 +396,7 @@ server {
         access_log    /web/www/project.tld/log/access.log combined buffer=50k;
         error_log     /web/www/project.tld/log/error.log notice;
 
-	# CloudFlare restore original visitor IP
+        # CloudFlare restore original visitor IP
         #include cloudflare.conf;
         include php-fpm.conf;
         
@@ -418,7 +418,7 @@ server {
         access_log    /web/www/project.tld/log/access.backend.log combined buffer=50k;
         error_log     /web/www/project.tld/log/error.backend.log notice;
         
-	# CloudFlare restore original visitor IP
+        # CloudFlare restore original visitor IP
         #include cloudflare.conf;
         include php-fpm.conf;
         
