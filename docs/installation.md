@@ -386,6 +386,13 @@ location ~ \.php$ {
 # Must be included in http directive 
 include deny-bots.conf;
 
+# frontend www redirect
+server {
+        server_name www.project.tld;
+        listen 80;
+        return 301 $scheme://project.tld$request_uri;
+}
+
 # frontend
 server {
         server_name project.tld;
