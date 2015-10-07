@@ -155,7 +155,7 @@
 
 ####3. Create config helpers
 
-#####- `/etc/nginx/conf.d/cloudflare.conf`
+#####- `/etc/nginx/cloudflare.conf`
 
 ```
 ##CloudFlare IP Forwarding
