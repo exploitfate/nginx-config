@@ -280,7 +280,7 @@ location ~* (?:\.(?:bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|md)|~)$ {
 }
 ```
 
-#####- `/etc/nginx/deny-bots.conf`
+#####- SKIP THIS `/etc/nginx/deny-bots.conf`
 
 ```
 map $http_user_agent $limit_bots {
