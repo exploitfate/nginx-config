@@ -450,7 +450,32 @@ server {
     sudo nginx -t
 
 
-####7. Restart nginx
+####7. Enable log rotation for project.tld nginx logs ` /etc/logrotate.d/project.tld`
+
+
+
+```
+/web/www/project.tld/log/*.log {
+ daily
+ missingok
+ rotate 60
+ compress
+ delaycompress
+ notifempty
+ create 0640 web root
+ sharedscripts
+ prerotate
+  if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+   run-parts /etc/logrotate.d/httpd-prerotate; \
+  fi \
+ endscript
+ postrotate
+  [ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`
+ endscript
+}
+```
+
+####8. Restart nginx
 
 
     sudo service nginx restart
