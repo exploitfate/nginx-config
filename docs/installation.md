@@ -451,6 +451,7 @@ server {
 
 
 ####7. Enable log rotation for project.tld nginx logs ` /etc/logrotate.d/project.tld`
+> Hint: For testing log rotation run command `sudo logrotate -f /etc/logrotate.d/project.tld` 
 
 
 
