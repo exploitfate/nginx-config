@@ -462,7 +462,8 @@ server {
  compress
  delaycompress
  notifempty
- create 0640 web root
+ create 0640 web web
+ su web web
  sharedscripts
  prerotate
   if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
