@@ -78,11 +78,18 @@
     post_max_size = 128M
     upload_max_filesize = 128M
 
+####3. Create php mods file `/etc/php5/mods-available/realpath-cache.ini`
+
+
+    realpath_cache_size = 1M
+    realpath_cache_ttl = 3600
+
 ####3. Enable this mods
 
 
     sudo php5enmod nginx
     sudo php5enmod php-override
+    sudo php5enmod realpath-cache
 
 
 ####4. Update file `/etc/php5/fpm/pool.d/www.conf` set
