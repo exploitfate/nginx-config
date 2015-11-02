@@ -84,7 +84,7 @@
     realpath_cache_size = 1M
     realpath_cache_ttl = 3600
 
-####3. Enable this mods
+####4. Enable this mods
 
 
     sudo php5enmod nginx
@@ -92,7 +92,7 @@
     sudo php5enmod realpath-cache
 
 
-####4. Update file `/etc/php5/fpm/pool.d/www.conf` set
+####5. Update file `/etc/php5/fpm/pool.d/www.conf` set
 
 
     user = web
@@ -100,7 +100,7 @@
     listen.owner = web
     listen.group = web
 
-####5. Restart php-fpm
+####6. Restart php-fpm
 
 
     sudo service php5-fpm restart
