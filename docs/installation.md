@@ -211,6 +211,7 @@ gzip_buffers 16 8k;
 gzip_types 
     application/atom+xml
     application/javascript
+    application/x-javascript
     application/json
     application/ld+json
     application/manifest+json
