@@ -64,21 +64,21 @@
 
 ### php-fpm
 
-####1. Create php mods file `/etc/php5/mods-available/nginx.ini`
+####1. Create php mods file `sudo nano /etc/php5/mods-available/nginx.ini`
 
 
 
     cgi.fix_pathinfo= 0
     expose_php = Off
 
-####2. Create php mods file `/etc/php5/mods-available/php-override.ini`
+####2. Create php mods file `sudo nano /etc/php5/mods-available/php-override.ini`
 
 
     memory_limit = 512M
     post_max_size = 128M
     upload_max_filesize = 128M
 
-####3. Create php mods file `/etc/php5/mods-available/realpath-cache.ini`
+####3. Create php mods file `sudo nano /etc/php5/mods-available/realpath-cache.ini`
 
 
     realpath_cache_size = 1M
@@ -92,7 +92,7 @@
     sudo php5enmod realpath-cache
 
 
-####5. Update file `/etc/php5/fpm/pool.d/www.conf` set
+####5. Update file `sudo nano /etc/php5/fpm/pool.d/www.conf` set
 
 
     user = web
@@ -148,7 +148,7 @@
 
 ###nginx
 
-####1. Update file `/etc/nginx/nginx.conf` set
+####1. Update file `sudo nano /etc/nginx/nginx.conf` set
 
 
 
@@ -162,7 +162,7 @@
 
 ####3. Create config helpers
 
-#####- `/etc/nginx/cloudflare.conf`
+#####- `sudo nano /etc/nginx/cloudflare.conf`
 
 ```
 ##CloudFlare IP Forwarding
@@ -188,7 +188,7 @@ set_real_ip_from 2405:8100::/32;
 real_ip_header CF-Connecting-IP;
 ```
 
-#####- `/etc/nginx/conf.d/charset.conf`
+#####- `sudo nano /etc/nginx/conf.d/charset.conf`
 
 ```
 #Specify a charset
@@ -198,7 +198,7 @@ client_max_body_size 128M;
 server_tokens off;
 ```
 
-#####- `/etc/nginx/conf.d/gzip.conf`
+#####- `sudo nano /etc/nginx/conf.d/gzip.conf`
 
 ```
 # Gzip Settings
@@ -236,7 +236,7 @@ gzip_types
     text/x-cross-domain-policy;
 ```
 
-#####- `/etc/nginx/expires.conf`
+#####- `sudo nano /etc/nginx/expires.conf`
 
 ```
 # Expire rules for static content
@@ -281,7 +281,7 @@ location = /favicon.ico {
 }
 ```
 
-#####- `/etc/nginx/cross-domain-fonts.conf`
+#####- `sudo nano /etc/nginx/cross-domain-fonts.conf`
 
 ```
 # Cross domain webfont access
@@ -297,7 +297,7 @@ location ~* \.(?:ttf|ttc|otf|eot|woff|woff2)$ {
 }
 ```
 
-#####- `/etc/nginx/protect-system-files.conf`
+#####- `sudo nano /etc/nginx/protect-system-files.conf`
 
 ```
 # Prevent clients from accessing hidden files (starting with a dot)
@@ -312,7 +312,7 @@ location ~* (?:\.(?:bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|md)|~)$ {
 }
 ```
 
-#####- SKIP THIS `/etc/nginx/deny-bots.conf`
+#####- SKIP THIS `sudo nano /etc/nginx/deny-bots.conf`
 
 ```
 if ($http_user_agent ~* (bingbot|Googlebot|MJ12bot|Riddlerbot|sogou\ spider|YandexBot|Baiduspider|ia_archiver|UptimeRobot|Yahoo) ) {
@@ -470,7 +470,7 @@ if ($http_user_agent ~* (DealGates\ Bot|Link\ Valet\ Online|Shelob|Technoratibot
 }
 ```
 
-#####- `/etc/nginx/php-fpm.conf`
+#####- `sudo nano /etc/nginx/php-fpm.conf`
 
 ```
 set           $bootstrap  index.php;
@@ -503,7 +503,7 @@ location ~ \.php$ {
 ```
 
 
-####4. Create project site config `/etc/nginx/sites-available/project.tld`
+####4. Create project site config `sudo nano /etc/nginx/sites-available/project.tld`
 
 ```
 ##
@@ -577,7 +577,7 @@ server {
     sudo nginx -t
 
 
-####7. Enable log rotation for project.tld nginx logs ` /etc/logrotate.d/project.tld`
+####7. Enable log rotation for project.tld nginx logs ` sudo nano /etc/logrotate.d/project.tld`
 > Hint: For testing log rotation run command `sudo logrotate -f /etc/logrotate.d/project.tld` 
 
 
