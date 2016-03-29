@@ -508,6 +508,8 @@ location ~ \.php$ {
 set           $bootstrap    index.php;
 index         $bootstrap    index.html;
 
+error_page    404     /404.php;
+
 location / {
         try_files $uri $uri/ =404;
 }
