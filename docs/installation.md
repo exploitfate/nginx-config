@@ -470,7 +470,7 @@ if ($http_user_agent ~* (DealGates\ Bot|Link\ Valet\ Online|Shelob|Technoratibot
 }
 ```
 
-#####- `sudo nano /etc/nginx/php-fpm.conf`
+#####- `sudo nano /etc/nginx/php-fpm-bootstrap.conf`
 
 ```
 set           $bootstrap  index.php;
@@ -478,6 +478,38 @@ index         $bootstrap;
 
 location / {
         try_files $uri $uri/ /$bootstrap$is_args$args;
+}
+
+location ~ \.php$ {
+        try_files $uri =404;
+
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_index               $bootstrap;
+
+        # Connect to php-fpm via socket
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+
+        fastcgi_connect_timeout     30s;
+        fastcgi_read_timeout        30s;
+        fastcgi_send_timeout        60s;
+        fastcgi_ignore_client_abort on;
+        fastcgi_pass_header         "X-Accel-Expires";
+
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  PATH_INFO        $fastcgi_path_info;
+        fastcgi_param  HTTP_REFERER     $http_referer;
+        include fastcgi_params;
+}
+```
+
+#####- `sudo nano /etc/nginx/php-fpm-html.conf`
+
+```
+set           $bootstrap    index.php;
+index         $bootstrap    index.html;
+
+location / {
+        try_files $uri $uri/ =404;
 }
 
 location ~ \.php$ {
@@ -532,7 +564,7 @@ server {
 
         # CloudFlare restore original visitor IP
         #include cloudflare.conf;
-        include php-fpm.conf;
+        include php-fpm-bootstrap.conf; # Replace with php-fpm-html.conf for no CMS project
         
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
@@ -554,7 +586,7 @@ server {
         
         # CloudFlare restore original visitor IP
         #include cloudflare.conf;
-        include php-fpm.conf;
+        include php-fpm-bootstrap.conf; # Replace with php-fpm-html.conf for no CMS project
         
         include cross-domain-fonts.conf;
         include protect-system-files.conf;
