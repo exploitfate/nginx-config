@@ -506,7 +506,7 @@ location ~ \.php$ {
 
 ```
 set           $bootstrap    index.php;
-index         $bootstrap    index.html;
+index         $bootstrap    index.html    index.htm;
 
 error_page    404     /404.php;
 
