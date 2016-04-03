@@ -10,6 +10,8 @@ accessible, if needed, even cross-domain.
 ## License
 
 ## Installation and config guide
-[Installation and config guide](docs/installation.md)
+[Installation and config guide on Ubuntu 14.04](docs/installation.md)
+
+[Installation and config guide on Ubuntu 16.04](docs/16.04/installation.md)
 
 [MIT License](LICENSE.md)
