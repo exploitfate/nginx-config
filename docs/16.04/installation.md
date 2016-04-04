@@ -584,6 +584,13 @@ server {
         access_log    /web/www/project.tld/log/access.log combined buffer=50k;
         error_log     /web/www/project.tld/log/error.log notice;
 
+
+
+        # Avoid index.php in URI 
+        #if ($request_uri ~* "^(.*/)index\.php(?:.*)$") {
+        #    return 301 $1$is_args$args;
+        #}
+        
         # CloudFlare restore original visitor IP
         #include cloudflare.conf;
         #include deny-bots.conf;
