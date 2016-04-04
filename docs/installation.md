@@ -196,6 +196,8 @@ charset utf-8;
 
 client_max_body_size 128M;
 server_tokens off;
+
+merge_slashes off;
 ```
 
 #####- `sudo nano /etc/nginx/conf.d/gzip.conf`
@@ -563,7 +565,10 @@ server {
 
         access_log    /web/www/project.tld/log/access.log combined buffer=50k;
         error_log     /web/www/project.tld/log/error.log notice;
-
+        
+        # Remove all double or triple slashes
+        #rewrite ^(.*)//+(.*)$ $1/$2 permanent;
+        
         # Avoid index.php in URI 
         #if ($request_uri ~* "^(.*/)index\.php(?:.*)$") {
         #    return 301 $1$is_args$args;
