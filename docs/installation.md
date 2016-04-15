@@ -9,7 +9,7 @@
 
     sudo apt-get update && sudo apt-get upgrade
     sudo apt-get install nginx memcached mysql-server-core-5.6 mysql-server-5.6 mysql-client-5.6 mysql-client-core-5.6 mysql-common-5.6
-    sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-memcache php5-memcached php5-gd php-apc
+    sudo apt-get install php5-fpm php5 php5-cli php5-curl php5-mcrypt php5-intl php5-mysql php5-memcache php5-memcached php5-imagick php-apc
     sudo php5enmod mcrypt
     
 
