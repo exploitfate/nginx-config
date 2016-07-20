@@ -707,7 +707,7 @@ server {
 ####4. Add composer assets plugin
 
 
-    php composer.phar global require "fxp/composer-asset-plugin:@dev"
+    php composer.phar global require "fxp/composer-asset-plugin"
 
 ####5. Install packages and init project environment
 
