@@ -661,7 +661,7 @@ server {
 
 
     sudo su web
-    ssh-keygen -t rsa -C "deploy@project.tld"
+    ssh-keygen -t rsa -b 4096 -C "deploy@project.tld"
  and add `project.tld` to the repo deployment key
 
 
