@@ -2,7 +2,9 @@ Choose latest package at `https://nginx.org/packages/ubuntu/pool/nginx/n/nginx-n
 
 `wget https://nginx.org/packages/ubuntu/pool/nginx/n/nginx-nr-agent/nginx-nr-agent_2.0.0-9_all.deb`
 
-`sudo apt install docutils-common docutils-doc python-daemon python-docutils python-lockfile python-pil python-pygments python-roman python-setproctitle`
+```
+sudo apt install docutils-common docutils-doc python-daemon python-docutils python-lockfile python-pil python-pygments python-roman python-setproctitle
+```
 `sudo dpkg -i nginx-nr-agent_2.0.0-9_all.deb`
 
 
@@ -50,7 +52,9 @@ url=http://<ip_address>/status
 Run monitor 
 
 Ubuntu 14.04
+
 `sudo service nginx-nr-agent start`
 
 Ubuntu 16.04
+
 `sudo /usr/bin/nginx-nr-agent.py start`
