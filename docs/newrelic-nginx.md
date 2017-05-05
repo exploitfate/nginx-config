@@ -6,7 +6,7 @@ Choose latest package at `https://nginx.org/packages/ubuntu/pool/nginx/n/nginx-n
 `sudo dpkg -i nginx-nr-agent_2.0.0-9_all.deb`
 
 
-Replace <ip_address> below with 127.0.0.1 or Amazon Elastic IP Address when Amazon EC2
+Replace `<ip_address>` below with `127.0.0.1` or Amazon Elastic IP Address when Amazon EC2
 
 `sudo nano /etc/nginx/sites-available/status`
 
@@ -31,6 +31,7 @@ server {
 ```
 
 `sudo ln -s /etc/nginx/sites-available/status /etc/nginx/sites-enabled/`
+
 `sudo nginx -t`
 
 `sudo service nginx restart`
